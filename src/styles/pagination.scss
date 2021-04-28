@@ -1,0 +1,32 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__images {
+    border: 3px solid white;
+    width: 6rem;
+    height: 3rem;
+    opacity: 0.8;
+    margin: 1rem;
+    cursor: pointer;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+      -webkit-filter: grayscale(50%) !important;
+      filter: grayscale(50%) !important;
+    }
+    img:hover {
+      -webkit-filter: grayscale(0) !important;
+      filter: grayscale(0) !important;
+    }
+  }
+
+  &__number {
+    width: 3rem;
+    height: 3rem;
+    opacity: 0.8;
+    background-color: red;
+  }
+}
