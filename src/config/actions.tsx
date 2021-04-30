@@ -5,16 +5,12 @@ import {
 } from './constants';
 
 const fetchingData = async (endpoint: string) => {
-  try {
     const res = await fetch(endpoint);
     const data = await res.json();
     return data;
-  } catch (error) {
-    console.log(error);
-  }
 };
 
-const getOffSetAndLimit = (page: number) => {
+export const getOffSetAndLimit = (page: number) => {
   const itemPerPage = 8;
   const indexOfLastItem = page * itemPerPage;
   const indexOfFirstItem = indexOfLastItem - itemPerPage;

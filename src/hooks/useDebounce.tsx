@@ -12,7 +12,7 @@ export default function useDebounce(value:string, delay:number) {
         clearTimeout(handler);
       };
     },
-    [value, delay]
+    [delay, value]
   );
 
   return debouncedValue;

@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.10",
-    "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
     "node-sass": "^5.0.0",
     "react": "^17.0.2",
@@ -16,7 +15,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -38,11 +37,22 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/react": "^11.2.6",
+    "@testing-library/react-hooks": "^5.1.2",
     "@types/jest": "^26.0.22",
     "@types/node": "^12.20.10",
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
     "@types/react-router-dom": "^5.1.7",
+    "msw": "^0.28.2",
     "typescript": "^4.2.4"
+  },
+  "jest": {
+    "resetMocks": true,
+    "collectCoverageFrom": [
+      "!src/__tests__/actions/handler.tsx",
+      "!src/__tests__/actions/response.tsx",
+      "!src/__tests__/actions/server.tsx"
+    ]
   }
 }

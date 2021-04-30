@@ -133,7 +133,7 @@ const Characters = () => {
             currentPage={currentPage}
             paginate={paginate}
           />
-          <div className="characters">
+          <div className="characters" data-testid="char">
             {characters?.map((character: Character) => {
               return <CharacterCard key={character.id} character={character} hideButton={hideButton}/>;
             })}
