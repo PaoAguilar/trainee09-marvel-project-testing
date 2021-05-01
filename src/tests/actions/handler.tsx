@@ -1,6 +1,7 @@
 import { rest } from 'msw';
 import { comicFormatFilterResponse, comicListResponse, comicTitleFilterResponse } from './comicsResponse';
 import { response, characterListResponse, searchResponse, filterByComicResponse, filterCharByStoryResponse } from './response';
+import { filterStoryByComicResponse, storyListResponse } from './storiesResponse';
 
 export const handler = [
 
@@ -92,8 +93,13 @@ export const handler = [
     }
   ),
 
-  rest.get('https://gateway.marvel.com/v1/public/stories', (_, res, ctx) => {
-    return res(ctx.status(200), ctx.json({ results: [response] }));
+  rest.get('https://gateway.marvel.com/v1/public/stories', (req, res, ctx) => {
+    const query = req.url.searchParams
+    const comics = query.get("comics")
+    if(comics) {
+      return res(ctx.status(200), ctx.json(filterStoryByComicResponse));
+    }
+    return res(ctx.status(200), ctx.json(storyListResponse));
   }),
 
   rest.get('https://gateway.marvel.com/v1/public/stories/1', (_, res, ctx) => {
@@ -114,12 +120,12 @@ export const handler = [
     }
   ),
 
-  rest.get(
-    'https://gateway.marvel.com/v1/public/stories',
-    (req, res, ctx) => {
-      const query = req.url.searchParams
-        const comics = query.get("comics")
-      return res(ctx.status(200), ctx.json({ results: [response], comics }));
-    }
-  ),
+  // rest.get(
+  //   'https://gateway.marvel.com/v1/public/stories',
+  //   (req, res, ctx) => {
+  //     const query = req.url.searchParams
+  //       const comics = query.get("comics")
+  //     return res(ctx.status(200), ctx.json({ results: [response], comics }));
+  //   }
+  // ),
 ];

@@ -21,6 +21,7 @@ import {
 } from '../../config/actions';
 import { comicFormatFilterResponse, comicListResponse, comicTitleFilterResponse } from './comicsResponse';
 import { characterListResponse, filterByComicResponse, filterCharByStoryResponse, response, searchResponse } from './response';
+import { filterStoryByComicResponse, storyListResponse } from './storiesResponse';
 
 test('should asign a page number', () => {
   const page = 4;
@@ -100,10 +101,6 @@ describe('All the fetches', () => {
   test('should get comics characters', async () => {
     // const res = { results: [response] };
     const data = await getComicsCharacters('1',1);
-    // console.log(res);
-    // console.log(data);
-    
-    
     expect(data).toEqual(filterByComicResponse);
   });
 
@@ -114,7 +111,7 @@ describe('All the fetches', () => {
   });
 
   test('should get list of stories', async () => {
-    const res = { results: [response] };
+    const res = storyListResponse;
     const data = await getListOfStories(1);
     expect(data).toEqual(res);
   });
@@ -137,9 +134,10 @@ describe('All the fetches', () => {
     expect(data).toEqual(filterCharByStoryResponse);
   });
 
+  // FALTA CAMBIAR EL RESPONSE
   test('should filter stories by comic', async () => {
     const res = { results: [response] };
     const data = await filterStoriesByComic('1',1);
-    expect(data).toEqual(res);
+    expect(data).toEqual(filterStoryByComicResponse);
   });
 });

@@ -15,12 +15,14 @@ const Stories = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [isSearching, setIsSearching] = useState(false);
-  const [filterBy, setFilterBy] = useState('');
+  const [filterBy, setFilterBy] = useState('Comic');
   const { stories } = state;
   const hideButton = false;
   const debouncedSearchTerm = useDebounce(searchTerm, 1000);
 
   useEffect(() => {
+    console.log(filterBy);
+    
     if (filterBy === 'Comic') {
       if (searchTerm) {
         setIsSearching(true);
@@ -44,6 +46,8 @@ const Stories = () => {
       return;
     } else {
       getListOfStories(currentPage).then((response) => {
+        // console.log(JSON.stringify(response));
+
         setTotal(response.data.total);
         dispatch({
           type: 'LIST_OF_STORIES',
@@ -69,13 +73,12 @@ const Stories = () => {
           value={searchTerm}
           className="search__input"
           placeholder="Search"
-          disabled={filterBy === ''}
           onChange={(e) => {
             setSearchTerm(e.target.value);
           }}
         />
         <select
-          defaultValue="Search By..."
+          defaultValue="Comic"
           className="search__select"
           onChange={(e) => {
             setSearchTerm('');
@@ -83,7 +86,6 @@ const Stories = () => {
             setCurrentPage(1);
           }}
         >
-          <option disabled>Search By...</option>
           <option value="Comic">Comic</option>
         </select>
       </div>
@@ -100,7 +102,13 @@ const Stories = () => {
           />
           <div className="stories">
             {stories?.map((story: Story) => {
-              return <StoryCard key={story.id} story={story} hideButton={hideButton}/>;
+              return (
+                <StoryCard
+                  key={story.id}
+                  story={story}
+                  hideButton={hideButton}
+                />
+              );
             })}
           </div>
           <Pagination
