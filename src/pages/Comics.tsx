@@ -27,18 +27,11 @@ const Comics = () => {
   const debouncedSearchTerm = useDebounce(searchTerm, 1000);
 
   useEffect(() => {
-    console.log(filterBy);
-    if (filterBy === 'Title') {
-      console.log('serching title');
-      
+    if (filterBy === 'Title') {      
       if (searchTerm) {
-        console.log(searchTerm);
-        
         setIsSearching(true);
         filterComicsByTitle(debouncedSearchTerm, currentPage).then(
-          (response) => {
-            console.log(response);
-            
+          (response) => {            
             if (response) setTotal(response.data.total);
             setIsSearching(false);
             dispatch({

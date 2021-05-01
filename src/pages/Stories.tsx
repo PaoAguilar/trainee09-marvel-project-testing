@@ -21,8 +21,6 @@ const Stories = () => {
   const debouncedSearchTerm = useDebounce(searchTerm, 1000);
 
   useEffect(() => {
-    console.log(filterBy);
-    
     if (filterBy === 'Comic') {
       if (searchTerm) {
         setIsSearching(true);
