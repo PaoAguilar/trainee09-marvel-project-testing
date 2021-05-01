@@ -1,5 +1,5 @@
 import { rest } from 'msw';
-import { comicListResponse, comicTitleFilterResponse } from './comicsResponse';
+import { comicFormatFilterResponse, comicListResponse, comicTitleFilterResponse } from './comicsResponse';
 import { response, characterListResponse, searchResponse, filterByComicResponse, filterCharByStoryResponse } from './response';
 
 export const handler = [
@@ -53,8 +53,11 @@ export const handler = [
   rest.get('https://gateway.marvel.com/v1/public/comics', (req, res, ctx) => {
     const query = req.url.searchParams;
     const title = query.get('titleStartsWith');
+    const format = query.get('format');
     if(title) {
       return res(ctx.status(200), ctx.json(comicTitleFilterResponse));
+    }else if(format) {
+      return res(ctx.status(200), ctx.json(comicFormatFilterResponse));
     }
     return res(ctx.status(200), ctx.json(comicListResponse));
   }),
@@ -63,11 +66,11 @@ export const handler = [
     return res(ctx.status(200), ctx.json({ results: [response] }));
   }),
 
-  rest.get('https://gateway.marvel.com/v1/public/comics', (req, res, ctx) => {
-    const query = req.url.searchParams;
-    const format = query.get('trade%20paperback');
-    return res(ctx.status(200), ctx.json({ results: [response], format }));
-  }),
+  // rest.get('https://gateway.marvel.com/v1/public/comics', (req, res, ctx) => {
+  //   const query = req.url.searchParams;
+  //   const format = query.get('format');
+  //   return res(ctx.status(200), ctx.json({ results: [response], format }));
+  // }),
 
   // rest.get('https://gateway.marvel.com/v1/public/comics', (req, res, ctx) => {
   //   const query = req.url.searchParams;

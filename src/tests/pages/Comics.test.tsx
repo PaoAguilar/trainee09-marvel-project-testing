@@ -60,7 +60,7 @@ describe('Testing Comic component', () => {
       userEvent.click(screen.getByText('magazine'));
       jest.runAllTimers();
     });
-
-    screen.debug();
+    await waitForElementToBeRemoved(() => screen.queryByText(/searching/i));
+    // screen.debug();
   });
 });
