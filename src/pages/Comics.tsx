@@ -20,18 +20,25 @@ const Comics = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [isSearching, setIsSearching] = useState(false);
-  const [filterBy, setFilterBy] = useState('');
+  const [filterBy, setFilterBy] = useState('Title');
   const { comics } = state;
   const hideButton = false
 
   const debouncedSearchTerm = useDebounce(searchTerm, 1000);
 
   useEffect(() => {
+    console.log(filterBy);
     if (filterBy === 'Title') {
+      console.log('serching title');
+      
       if (searchTerm) {
+        console.log(searchTerm);
+        
         setIsSearching(true);
         filterComicsByTitle(debouncedSearchTerm, currentPage).then(
           (response) => {
+            console.log(response);
+            
             if (response) setTotal(response.data.total);
             setIsSearching(false);
             dispatch({
@@ -43,6 +50,8 @@ const Comics = () => {
       }
     } else {
       if (searchTerm) {
+        // console.log('searching format');
+        
         setIsSearching(true);
         filterComicsByFormat(debouncedSearchTerm, currentPage).then(
           (response) => {
@@ -64,6 +73,8 @@ const Comics = () => {
       return;
     } else {
       getListOfComics(currentPage).then((response) => {
+        // console.log(JSON.stringify(response));
+        
         setTotal(response.data.total);
         dispatch({
           type: 'LIST_OF_COMICS',
@@ -104,7 +115,6 @@ const Comics = () => {
             value={searchTerm}
             className="search__input"
             placeholder="Search"
-            disabled={filterBy === ''}
             onChange={(e) => {
               setSearchTerm(e.target.value);
             }}
@@ -112,7 +122,7 @@ const Comics = () => {
         )}
 
         <select
-          defaultValue="Search By..."
+          defaultValue="Title"
           className="search__select"
           onChange={(e) => {
             setSearchTerm('');
@@ -120,7 +130,6 @@ const Comics = () => {
             setCurrentPage(1);
           }}
         >
-          <option disabled>Search By...</option>
           <option value="Title">Title</option>
           <option value="Format">Format</option>
         </select>

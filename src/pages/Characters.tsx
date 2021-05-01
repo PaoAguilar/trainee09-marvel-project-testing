@@ -28,7 +28,7 @@ const Characters = () => {
   const debouncedSearchTerm = useDebounce(searchTerm, 1000);
 
   useEffect(() => {
-    console.log(filterBy);
+    // console.log(filterBy);
     
     if (filterBy === '' || filterBy === 'Name') {
       // console.log("Serching name");
@@ -88,7 +88,7 @@ const Characters = () => {
     if (debouncedSearchTerm) {
       return;
     } else {
-      console.log("En get list of char");   
+      // console.log("En get list of char");   
       getListOfCharacters(currentPage).then((response) => {
         setTotal(response.data.total);
         dispatch({

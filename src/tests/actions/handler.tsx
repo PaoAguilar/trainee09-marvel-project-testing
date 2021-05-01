@@ -1,4 +1,5 @@
 import { rest } from 'msw';
+import { comicListResponse, comicTitleFilterResponse } from './comicsResponse';
 import { response, characterListResponse, searchResponse, filterByComicResponse, filterCharByStoryResponse } from './response';
 
 export const handler = [
@@ -20,18 +21,6 @@ export const handler = [
       return res(ctx.status(200), ctx.json({ results: [response] }));
     }
   ),
-
-  // rest.get(
-  //   'https://gateway.marvel.com/v1/public/characters',
-  //   (req, res, ctx) => {
-  //     console.log("en handler filter by name");
-      
-  //     return res(
-  //       ctx.status(200),
-  //       ctx.json({ results: [response], nameStartsWith })
-  //     );
-  //   }
-  // ),
 
   rest.get(
     'https://gateway.marvel.com/v1/public/comics/1/characters',
@@ -61,8 +50,13 @@ export const handler = [
     }
   ),
 
-  rest.get('https://gateway.marvel.com/v1/public/comics', (_, res, ctx) => {
-    return res(ctx.status(200), ctx.json({ results: [response] }));
+  rest.get('https://gateway.marvel.com/v1/public/comics', (req, res, ctx) => {
+    const query = req.url.searchParams;
+    const title = query.get('titleStartsWith');
+    if(title) {
+      return res(ctx.status(200), ctx.json(comicTitleFilterResponse));
+    }
+    return res(ctx.status(200), ctx.json(comicListResponse));
   }),
 
   rest.get('https://gateway.marvel.com/v1/public/comics/1', (_, res, ctx) => {
@@ -75,11 +69,11 @@ export const handler = [
     return res(ctx.status(200), ctx.json({ results: [response], format }));
   }),
 
-  rest.get('https://gateway.marvel.com/v1/public/comics', (req, res, ctx) => {
-    const query = req.url.searchParams;
-    const title = query.get('spider');
-    return res(ctx.status(200), ctx.json({ results: [response], title }));
-  }),
+  // rest.get('https://gateway.marvel.com/v1/public/comics', (req, res, ctx) => {
+  //   const query = req.url.searchParams;
+  //   const title = query.get('spider');
+  //   return res(ctx.status(200), ctx.json({ results: [response], title }));
+  // }),
 
   rest.get(
     'https://gateway.marvel.com/v1/public/comics/1/characters',

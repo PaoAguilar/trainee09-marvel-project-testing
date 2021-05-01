@@ -70,8 +70,8 @@ test('should get characters by comic id', async () => {
     jest.runAllTimers();
   });
   await waitForElementToBeRemoved(() => screen.queryByText(/searching/i));
-    expect(screen.queryByText(/characters/i)).toBeInTheDocument();
-  screen.debug();
+  expect(screen.queryByText(/characters/i)).toBeInTheDocument();
+  // screen.debug();
   // screen.debug()
 });
 
@@ -95,6 +95,5 @@ test('should get characters by story id', async () => {
   });
   await waitForElementToBeRemoved(() => screen.queryByText(/searching/i));
   expect(screen.queryByText(/characters/i)).toBeInTheDocument();
-  screen.debug();
   // screen.debug()
 });
