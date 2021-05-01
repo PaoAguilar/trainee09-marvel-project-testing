@@ -21,18 +21,24 @@ const Characters = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [isSearching, setIsSearching] = useState(false);
-  const [filterBy, setFilterBy] = useState('');
+  const [filterBy, setFilterBy] = useState('Name');
   const { characters } = state;
   const hideButton = false
 
   const debouncedSearchTerm = useDebounce(searchTerm, 1000);
 
   useEffect(() => {
+    console.log(filterBy);
+    
     if (filterBy === '' || filterBy === 'Name') {
+      // console.log("Serching name");
+      
       if (searchTerm) {
+        // console.log("Entro al if del name");
         setIsSearching(true);
         filterCharactersByName(debouncedSearchTerm, currentPage).then(
           (response) => {
+            // console.log(JSON.stringify(response) );
             if (response) setTotal(response.data.total);
             setIsSearching(false);
             dispatch({
@@ -43,9 +49,12 @@ const Characters = () => {
         );
       }
     } else if (filterBy === 'Comic') {
+      // console.log('en filter comic');
       if (searchTerm) {
         filterCharactersByComic(debouncedSearchTerm, currentPage).then(
           (response) => {
+            // console.log(response);
+            
             if (response) setTotal(response.data.total);
             setIsSearching(false);
             dispatch({
@@ -75,9 +84,11 @@ const Characters = () => {
   }, [currentPage, debouncedSearchTerm, dispatch, filterBy]);
 
   useEffect(() => {
+    setIsSearching(true)
     if (debouncedSearchTerm) {
       return;
     } else {
+      console.log("En get list of char");   
       getListOfCharacters(currentPage).then((response) => {
         setTotal(response.data.total);
         dispatch({
@@ -86,6 +97,7 @@ const Characters = () => {
         });
       });
     }
+    setIsSearching(false)
   }, [currentPage, debouncedSearchTerm, dispatch]);
   
   const paginate = (page: number) => {
@@ -103,13 +115,14 @@ const Characters = () => {
           value={searchTerm}
           className="search__input"
           placeholder="Search"
-          disabled={filterBy === ''}
           onChange={(e) => {
-            setSearchTerm(e.target.value);
+            const value= e.target.value
+            setSearchTerm(value);
           }}
         />
         <select
-          defaultValue="Search By..."
+          defaultValue="Name"
+          data-testid="filterSelect"
           className="search__select"
           onChange={(e) => {
             setSearchTerm('');
@@ -117,10 +130,9 @@ const Characters = () => {
             setCurrentPage(1);
           }}
         >
-          <option disabled>Search By...</option>
-          <option value="Name">Name</option>
-          <option value="Comic">Comic</option>
-          <option value="Story">Story</option>
+          <option value="Name" data-testid="select-option">Name</option>
+          <option value="Comic" data-testid="select-option">Comic</option>
+          <option value="Story" data-testid="select-option">Story</option>
         </select>
       </div>
       {isSearching && <div>Searching ...</div>}

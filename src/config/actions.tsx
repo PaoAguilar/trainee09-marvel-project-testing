@@ -35,6 +35,8 @@ export const getCharacter = (id: string) => {
 };
 
 export const filterCharactersByName = (word: string, page: number) => {
+  // console.log("Funcion real filter by name");
+  
   let numberOfItem = getOffSetAndLimit(page);
   return fetchingData(
     CHARACTERS_ENDPOINTS.FILTER_CHARACTERS_BY_NAME.replace(':word', `${word}`)

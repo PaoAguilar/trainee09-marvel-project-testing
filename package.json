@@ -16,8 +16,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --coverage",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "customtest": "react-scripts test --coverage --watchAll=false"
   },
+  
   "eslintConfig": {
     "extends": [
       "react-app",

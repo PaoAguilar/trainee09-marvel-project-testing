@@ -43,12 +43,16 @@ describe('All the fetches', () => {
   test('should filter a character by name', async () => {
     const res = { results: [response] };
     const data = await filterCharactersByName('spider',1);
+    // console.log(data);
+    
     expect(data).toEqual(res);
   });
 
   test('should filter a character by comic', async () => {
     const res = { results: [response] };
     const data = await filterCharactersByComic('1',1);
+    // console.log('en el filter de actions test');
+    
     expect(data).toEqual(res);
   });
 

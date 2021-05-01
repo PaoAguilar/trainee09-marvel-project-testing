@@ -1,9 +1,17 @@
 import { rest } from 'msw';
-import { response } from './response';
+import { response, characterListResponse, searchResponse, filterByComicResponse } from './response';
 
 export const handler = [
-  rest.get('https://gateway.marvel.com/v1/public/characters', (_, res, ctx) => {
-    return res(ctx.status(200), ctx.json({ results: [response] }));
+
+  rest.get('https://gateway.marvel.com/v1/public/characters', (req, res, ctx) => {
+    
+    const query = req.url.searchParams;
+    const nameStartsWith = query.get('nameStartsWith');
+    // console.log(nameStartsWith);
+    if (nameStartsWith) {
+      return res(ctx.status(200), ctx.json(searchResponse));
+    }
+    return res(ctx.status(200), ctx.json(characterListResponse));
   }),
 
   rest.get(
@@ -13,22 +21,22 @@ export const handler = [
     }
   ),
 
-  rest.get(
-    'https://gateway.marvel.com/v1/public/characters',
-    (req, res, ctx) => {
-      const query = req.url.searchParams;
-      const nameStartsWith = query.get('nameStartsWith');
-      return res(
-        ctx.status(200),
-        ctx.json({ results: [response], nameStartsWith })
-      );
-    }
-  ),
+  // rest.get(
+  //   'https://gateway.marvel.com/v1/public/characters',
+  //   (req, res, ctx) => {
+  //     console.log("en handler filter by name");
+      
+  //     return res(
+  //       ctx.status(200),
+  //       ctx.json({ results: [response], nameStartsWith })
+  //     );
+  //   }
+  // ),
 
   rest.get(
     'https://gateway.marvel.com/v1/public/comics/1/characters',
     (_, res, ctx) => {
-      return res(ctx.status(200), ctx.json({ results: [response] }));
+      return res(ctx.status(200), ctx.json(filterByComicResponse));
     }
   ),
 
