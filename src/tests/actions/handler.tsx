@@ -1,5 +1,5 @@
 import { rest } from 'msw';
-import { response, characterListResponse, searchResponse, filterByComicResponse } from './response';
+import { response, characterListResponse, searchResponse, filterByComicResponse, filterCharByStoryResponse } from './response';
 
 export const handler = [
 
@@ -43,7 +43,7 @@ export const handler = [
   rest.get(
     'https://gateway.marvel.com/v1/public/stories/1/characters',
     (_, res, ctx) => {
-      return res(ctx.status(200), ctx.json({ results: [response] }));
+      return res(ctx.status(200), ctx.json(filterCharByStoryResponse));
     }
   ),
 

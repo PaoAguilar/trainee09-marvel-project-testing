@@ -50,6 +50,26 @@ export const filterByComicResponse = {
   },
 }
 
+export const filterCharByStoryResponse = {
+  data: {
+    offset: 0,
+    limit: 8,
+    total: 10,
+    results: [
+      {
+        id: 1011281,
+        name: 'Abyss',
+        description: '',
+        thumbnail: {
+          path:
+            'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available',
+          extension: 'jpg',
+        },
+      },
+    ],
+  },
+}
+
 export const characterListResponse = {
   data: {
     offset: 0,
@@ -90,3 +110,4 @@ export const characterListResponse = {
     ],
   },
 };
+

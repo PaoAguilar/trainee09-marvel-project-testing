@@ -61,7 +61,7 @@ test('should get characters by comic id', async () => {
   );
   await waitForElementToBeRemoved(() => screen.getByText('No Results Found'));
   const select = screen.getByTestId('filterSelect');
-  userEvent.selectOptions(select, "Comic");
+  userEvent.selectOptions(select, 'Comic');
   userEvent.click(screen.getByText('Comic'));
 
   act(() => {
@@ -70,6 +70,31 @@ test('should get characters by comic id', async () => {
     jest.runAllTimers();
   });
   await waitForElementToBeRemoved(() => screen.queryByText(/searching/i));
+    expect(screen.queryByText(/characters/i)).toBeInTheDocument();
+  screen.debug();
+  // screen.debug()
+});
+
+test('should get characters by story id', async () => {
+  jest.useFakeTimers();
+  const { getByPlaceholderText } = render(
+    <GlobalProvider>
+      <Characters />
+    </GlobalProvider>,
+    { wrapper: BrowserRouter }
+  );
+  await waitForElementToBeRemoved(() => screen.getByText('No Results Found'));
+  const select = screen.getByTestId('filterSelect');
+  userEvent.selectOptions(select, 'Story');
+  userEvent.click(screen.getByText('Story'));
+
+  act(() => {
+    const input = getByPlaceholderText('Search');
+    user.type(input, '101');
+    jest.runAllTimers();
+  });
+  await waitForElementToBeRemoved(() => screen.queryByText(/searching/i));
+  expect(screen.queryByText(/characters/i)).toBeInTheDocument();
   screen.debug();
   // screen.debug()
 });

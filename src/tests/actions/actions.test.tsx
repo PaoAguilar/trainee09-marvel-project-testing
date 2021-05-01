@@ -19,7 +19,7 @@ import {
   getStory,
   getStoryCharacters,
 } from '../../config/actions';
-import { response } from './response';
+import { characterListResponse, filterByComicResponse, filterCharByStoryResponse, response, searchResponse } from './response';
 
 test('should asign a page number', () => {
   const page = 4;
@@ -29,9 +29,9 @@ test('should asign a page number', () => {
 
 describe('All the fetches', () => {
   test('should return the list of characters', async () => {
-    const res = { results: [response] };
+    // const res = { results: [response] };
     const data = await getListOfCharacters(1);
-    expect(data).toEqual(res);
+    expect(data).toEqual(characterListResponse);
   });
 
   test('should return a character', async () => {
@@ -41,25 +41,25 @@ describe('All the fetches', () => {
   });
 
   test('should filter a character by name', async () => {
-    const res = { results: [response] };
+    // const res = { results: [response] };
     const data = await filterCharactersByName('spider',1);
     // console.log(data);
     
-    expect(data).toEqual(res);
+    expect(data).toEqual(searchResponse);
   });
 
   test('should filter a character by comic', async () => {
-    const res = { results: [response] };
+    // const res = { results: [response] };
     const data = await filterCharactersByComic('1',1);
     // console.log('en el filter de actions test');
     
-    expect(data).toEqual(res);
+    expect(data).toEqual(filterByComicResponse);
   });
 
   test('should filter a character by story', async () => {
-    const res = { results: [response] };
+    // const res = { results: [response] };
     const data = await filterCharactersByStory('1',1);
-    expect(data).toEqual(res);
+    expect(data).toEqual(filterCharByStoryResponse);
   });
 
   test('should get characters Comics', async () => {
@@ -101,7 +101,11 @@ describe('All the fetches', () => {
   test('should get comics characters', async () => {
     const res = { results: [response] };
     const data = await getComicsCharacters('1',1);
-    expect(data).toEqual(res);
+    console.log(res);
+    console.log(data);
+    
+    
+    expect(data).toEqual(filterByComicResponse);
   });
 
   test('should get comics stories', async () => {
@@ -129,9 +133,9 @@ describe('All the fetches', () => {
   });
 
   test('should get stories characters', async () => {
-    const res = { results: [response] };
+    // const res = { results: [response] };
     const data = await getStoryCharacters('1',1);
-    expect(data).toEqual(res);
+    expect(data).toEqual(filterCharByStoryResponse);
   });
 
   test('should filter stories by comic', async () => {
