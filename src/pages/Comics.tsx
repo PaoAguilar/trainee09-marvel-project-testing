@@ -96,6 +96,7 @@ const Comics = () => {
         {filterBy === 'Format' ? (
           <select
             defaultValue="Select Format"
+            data-testid="formatSelect"
             className="search__input"
             onChange={(e) => {
               setSearchTerm(e.target.value);
@@ -104,7 +105,7 @@ const Comics = () => {
             <option disabled>Select Format</option>
             {formatList?.map((format, key) => {
               return (
-                <option key={key} value={encodeURI(format)}>
+                <option data-testid="format-option" key={key} value={encodeURI(format)}>
                   {format}
                 </option>
               );
@@ -124,14 +125,15 @@ const Comics = () => {
         <select
           defaultValue="Title"
           className="search__select"
+          data-testid="filterSelect"
           onChange={(e) => {
             setSearchTerm('');
             setFilterBy(e.target.value);
             setCurrentPage(1);
           }}
         >
-          <option value="Title">Title</option>
-          <option value="Format">Format</option>
+          <option value="Title" data-testid="select-option">Title</option>
+          <option value="Format" data-testid="select-option">Format</option>
         </select>
       </div>
       {isSearching && <div>Searching ...</div>}
