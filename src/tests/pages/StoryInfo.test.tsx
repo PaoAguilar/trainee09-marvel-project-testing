@@ -20,6 +20,6 @@ describe('Testion Story Info', () => {
     await waitFor(()=> expect(screen.getByText('Interior #11')).toBeInTheDocument());
     await waitFor(()=> expect(screen.getByText('Abyss')).toBeInTheDocument());
     await waitFor(()=> expect(screen.getByText('Savage Avengers (2019) #19')).toBeInTheDocument());
-    screen.debug();
+    // screen.debug();
   });
 });

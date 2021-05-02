@@ -41,7 +41,8 @@ const CharacterCard = ({
           {click === false ? (
             <img
               src={bookmarkAdd}
-              alt=""
+              alt="bookmarkAdd"
+              aria-label='bookmarkAdd'
               onClick={() => {
                 dispatch({
                   type: 'SET_BOOKMARK_CHARACTER',
@@ -53,7 +54,8 @@ const CharacterCard = ({
           ) : (
             <img
               src={bookmarkRemove}
-              alt=""
+              alt="bookmarkRemove"
+              aria-label='bookmarkRemove'
               onClick={() => {
                 dispatch({
                   type: 'REMOVE_BOOKMARK',
