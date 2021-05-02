@@ -1,23 +1,18 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
-import CharacterCard from '../../components/CharacterCard';
 import GlobalProvider from '../../context/GlobalContext';
+import StoryCard from '../../components/StoryCard';
 
-const character = {
-    id: 1,
-    name: 'wolverine',
-    thumbnail: {
-      extension: '',
-      path: '',
-    },
-    description: '',
-  };
+const story = {
+  id: 1,
+  title: 'Marvel',
+};
 
-describe('testing bookmarks in characters', () => {
-  test('should add or remove a bookmark character', () => {
-    const { getByRole } = render(
+describe('testing bookmarks in stories', () => {
+  test('should add or remove a bookmark from story', () => {
+    const {getByRole} = render(
       <GlobalProvider>
-        <CharacterCard character={character} hideButton={true} />
+        <StoryCard story={story} hideButton={true} />
       </GlobalProvider>
     );
     expect(getByRole('img', { name: 'bookmarkAdd' })).toBeInTheDocument();
@@ -31,7 +26,7 @@ describe('testing bookmarks in characters', () => {
   test('should hide a character', () => {
     const { getByText } = render(
       <GlobalProvider>
-        <CharacterCard character={character} hideButton={false} />
+        <StoryCard story={story} hideButton={false} />
       </GlobalProvider>
     );
     expect(getByText('hide')).toBeInTheDocument();

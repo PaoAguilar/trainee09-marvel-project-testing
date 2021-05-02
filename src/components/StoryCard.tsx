@@ -39,7 +39,8 @@ const StoryCard = ({
           {click === false ? (
             <img
               src={bookmarkAdd}
-              alt=""
+              alt="bookmarkAdd"
+              aria-label="bookmarkAdd"
               onClick={() => {
                 dispatch({
                   type: 'SET_BOOKMARK_STORY',
@@ -51,7 +52,8 @@ const StoryCard = ({
           ) : (
             <img
               src={bookmarkRemove}
-              alt=""
+              alt="bookmarkRemove"
+              aria-label="bookmarkRemove"
               onClick={() => {
                 dispatch({
                   type: 'REMOVE_BOOKMARK',

@@ -15,9 +15,7 @@ const ComicCard = ({
 }) => {
   const history = useHistory();
   const { state, dispatch } = useGlobalContex();
-  const bookmarked = state.bookmark.comics.find(
-    (el) => el.id === comic.id
-  )
+  const bookmarked = state.bookmark.comics.find((el) => el.id === comic.id)
     ? true
     : false;
   const [click, setClick] = useState(bookmarked);
@@ -40,7 +38,8 @@ const ComicCard = ({
           {click === false ? (
             <img
               src={bookmarkAdd}
-              alt=""
+              alt="bookmarkAdd"
+              aria-label="bookmarkAdd"
               onClick={() => {
                 dispatch({
                   type: 'SET_BOOKMARK_COMIC',
@@ -52,7 +51,8 @@ const ComicCard = ({
           ) : (
             <img
               src={bookmarkRemove}
-              alt=""
+              alt="bookmarkRemove"
+              aria-label="bookmarkRemove"
               onClick={() => {
                 dispatch({
                   type: 'REMOVE_BOOKMARK',
