@@ -7,7 +7,6 @@ import {
   comicTitleFilterResponse,
 } from './comicsResponse';
 import {
-  response,
   characterListResponse,
   searchResponse,
   filterByComicResponse,
@@ -85,13 +84,6 @@ export const handler = [
     return res(ctx.status(200), ctx.json(comicResponse));
   }),
 
-  // rest.get(
-  //   'https://gateway.marvel.com/v1/public/comics/1/characters',
-  //   (_, res, ctx) => {
-  //     return res(ctx.status(200), ctx.json(filterByComicResponse));
-  //   }
-  // ),
-
   rest.get(
     'https://gateway.marvel.com/v1/public/comics/1/stories',
     (_, res, ctx) => {
@@ -118,11 +110,4 @@ export const handler = [
       return res(ctx.status(200), ctx.json(comicResponse));
     }
   ),
-
-  // rest.get(
-  //   'https://gateway.marvel.com/v1/public/stories/1/characters',
-  //   (_, res, ctx) => {
-  //     return res(ctx.status(200), ctx.json({ results: [response] }));
-  //   }
-  // ),
 ];

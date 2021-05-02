@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  getByText,
   render,
   screen,
   waitForElementToBeRemoved,
@@ -22,12 +21,10 @@ test('search characters when mount', async () => {
   );
   await waitForElementToBeRemoved(() => screen.getByText('No Results Found'));
   expect(screen.getByText(/characters/i)).toBeInTheDocument();
-  // estos vienen del characterListResponse
+  // This dara comes from characterListResponse
   expect(screen.getByText('Spider Man')).toBeInTheDocument();
   expect(screen.getByText('Wolfpack')).toBeInTheDocument();
   expect(screen.getByText('Wolf Cub')).toBeInTheDocument();
-  // console.log(screen.getAllByText('Wolf Cub'));
-  // screen.debug()
 });
 
 test('should get characters by name', async () => {
@@ -44,7 +41,6 @@ test('should get characters by name', async () => {
     user.type(input, 'spide');
     jest.runAllTimers();
   });
-  // screen.debug()
 
   await waitForElementToBeRemoved(() => screen.queryByText(/searching/i)); // cuando se elimine searching, es porque ya resolvio el fetch
   expect(screen.queryByText(/characters/i)).toBeInTheDocument();
@@ -71,8 +67,6 @@ test('should get characters by comic id', async () => {
   });
   await waitForElementToBeRemoved(() => screen.queryByText(/searching/i));
   expect(screen.queryByText(/characters/i)).toBeInTheDocument();
-  // screen.debug();
-  // screen.debug()
 });
 
 test('should get characters by story id', async () => {
@@ -95,5 +89,4 @@ test('should get characters by story id', async () => {
   });
   await waitForElementToBeRemoved(() => screen.queryByText(/searching/i));
   expect(screen.queryByText(/characters/i)).toBeInTheDocument();
-  // screen.debug()
 });

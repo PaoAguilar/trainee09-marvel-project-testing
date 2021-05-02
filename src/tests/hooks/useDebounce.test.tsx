@@ -6,10 +6,8 @@ test('should update value after specified delay', async() => {
     ({ value, delay }) => useDebounce(value, delay),
     { initialProps: { value: '', delay: 500 } }
   );
-//   console.log(result.current);
   expect(result.current).toBe('');
   rerender({ value: 'Hello World', delay: 50 });
   await waitForValueToChange(() => result.current)
-//   console.log(result.current);
   expect(result.current).toBe('Hello World');
 });

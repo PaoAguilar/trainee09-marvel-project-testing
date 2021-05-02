@@ -35,6 +35,5 @@ describe('Testing Stories component', () => {
     });
     await waitForElementToBeRemoved(() => screen.queryByText(/searching/i));
     expect(screen.getByText("Interior #11")).toBeInTheDocument();
-    // screen.debug();
   });
 });

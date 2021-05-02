@@ -21,7 +21,6 @@ describe('Testing Comic component', () => {
       );
       await waitForElementToBeRemoved(() => screen.getByText('No Results Found'));
       expect(screen.getByText(/comics/i)).toBeInTheDocument();
-      // screen.debug();
     });
 
     test('should search comics by title', async () => {
@@ -39,7 +38,6 @@ describe('Testing Comic component', () => {
         jest.runAllTimers();
       });
       await waitForElementToBeRemoved(() => screen.queryByText(/searching/i));
-      // screen.debug()
     });
   test('should search comics by format', async () => {
     jest.useFakeTimers();
@@ -61,6 +59,5 @@ describe('Testing Comic component', () => {
       jest.runAllTimers();
     });
     await waitForElementToBeRemoved(() => screen.queryByText(/searching/i));
-    // screen.debug();
   });
 });

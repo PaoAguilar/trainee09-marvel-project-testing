@@ -49,22 +49,17 @@ test('should asign a page number', () => {
 
 describe('All the fetches', () => {
   test('should return the list of characters', async () => {
-    // const res = { results: [response] };
     const data = await getListOfCharacters(1);
     expect(data).toEqual(characterListResponse);
   });
 
   test('should return a character', async () => {
-    // const res = { results: [response] };
     const data = await getCharacter('1');
     expect(data).toEqual(characterResponse);
   });
 
   test('should filter a character by name', async () => {
-    // const res = { results: [response] };
     const data = await filterCharactersByName('spider', 1);
-    // console.log(data);
-
     expect(data).toEqual(searchResponse);
   });
 
@@ -115,7 +110,6 @@ describe('All the fetches', () => {
   });
 
   test('should get comics stories', async () => {
-    const res = { results: [response] };
     const data = await getComicsStories('1', 1);
     expect(data).toEqual(comicStoriesResponse);
   });
@@ -127,13 +121,11 @@ describe('All the fetches', () => {
   });
 
   test('should get a story', async () => {
-    // const res = { results: [response] };
     const data = await getStory('1');
     expect(data).toEqual(filterStoryByComicResponse);
   });
 
   test('should get stories comics', async () => {
-    // const res = { results: [response] };
     const data = await getStoriesComics('1', 1);
     expect(data).toEqual(comicResponse);
   });
