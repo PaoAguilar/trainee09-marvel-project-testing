@@ -111,3 +111,61 @@ export const characterListResponse = {
   },
 };
 
+export const characterResponse = {
+  data: {
+    offset: 0,
+    limit: 8,
+    total: 10,
+    results: [
+      {
+        id: 1011281,
+        name: 'Wolverine',
+        description: '',
+        thumbnail: {
+          path:
+            'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available',
+          extension: 'jpg',
+        },
+      },
+    ],
+  },
+}
+
+export const characterComicsResponse = {
+  data: {
+    offset: 0,
+    limit: 8,
+    count: 8,
+    results: [
+      {
+        id: 82967,
+        title: 'Weapon X: Days of Future Now (2005) #5',
+        description: null,
+        format: '',
+        thumbnail: {
+          path:
+            'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available',
+          extension: 'jpg',
+        }
+      },
+    ],
+  },
+}
+
+
+export const characterStoriesResponse = {
+  data: {
+    offset: 0,
+    limit: 8,
+    total: 113330,
+    count: 8,
+    results: [
+      {
+        id: 10,
+        title: 'Interior #11',
+        description: '',
+        type: 'story',
+      },
+    ],
+  },
+}

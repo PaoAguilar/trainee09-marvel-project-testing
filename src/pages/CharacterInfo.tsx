@@ -19,11 +19,14 @@ const CharacterInfo = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentPageComic, setCurrentPageComic] = useState<number>(1);
   const { character, charactersComics, characterStories } = state;
+  const [isSearching, setIsSearching] = useState(false);
   const [total, setTotal] = useState(0);
   const hideButton = true;
 
   useEffect(() => {
+    setIsSearching(true);
     getCharacter(characterId).then((response) => {
+      setIsSearching(false);
       dispatch({
         type: 'SET_CHARACTER',
         payload: { character: response.data.results[0] },
@@ -32,8 +35,10 @@ const CharacterInfo = () => {
   }, [characterId, dispatch]);
 
   useEffect(() => {
+    setIsSearching(true);
     getCharactersComics(characterId, currentPageComic).then((response) => {
       if (response) setTotal(response.data.total);
+      setIsSearching(false);
       dispatch({
         type: 'SET_CHARACTERS_COMICS',
         payload: { charactersComics: response.data.results },
@@ -42,8 +47,10 @@ const CharacterInfo = () => {
   }, [characterId, currentPageComic, dispatch]);
 
   useEffect(() => {
+    setIsSearching(true);
     getCharacterStories(characterId, currentPage).then((response) => {
       if (response) setTotal(response.data.total);
+      setIsSearching(false);
       dispatch({
         type: 'SET_CHARACTER_STORIES',
         payload: { characterStories: response.data.results },
@@ -63,6 +70,7 @@ const CharacterInfo = () => {
     <>
       <h1>CHARACTER INFORMATION</h1>
       <div className="character">
+        {isSearching && <div>Searching ...</div>}
         <div className="character__image">
           <img
             src={`${character?.thumbnail.path}.${character?.thumbnail.extension}`}
@@ -84,6 +92,7 @@ const CharacterInfo = () => {
         </div>
       </div>
       {charactersComics?.length === 0 ? <> </> : <h1>COMICS</h1>}
+      {isSearching && <div>Searching Comics...</div>}
       <div className="characters">
         {charactersComics?.map((comic: Comic) => {
           return (
@@ -101,6 +110,7 @@ const CharacterInfo = () => {
         />
       )}
       {characterStories?.length === 0 ? <> </> : <h1>STORIES</h1>}
+      {isSearching && <div>Searching Stories...</div>}
       <div className="stories">
         {characterStories?.map((story: Story) => {
           return (

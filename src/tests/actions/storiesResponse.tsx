@@ -18,26 +18,24 @@ export const storyListResponse = {
           'In the wake of September 11th, the world watched as firefighters, police officers and EMT workers selflessly risked their lives',
         description: '',
         type: 'story',
-      }
+      },
     ],
   },
 };
 
 export const filterStoryByComicResponse = {
-    data: {
-      offset: 0,
-      limit: 8,
-      total: 113330,
-      count: 8,
-      results: [
-        {
-          id: 10,
-          title:
-            'Interior #11',
-          description: '',
-          type: 'story',
-        }
-      ],
-    },
-  };
-  
+  data: {
+    offset: 0,
+    limit: 8,
+    total: 113330,
+    count: 8,
+    results: [
+      {
+        id: 10,
+        title: 'Interior #11',
+        description: '',
+        type: 'story',
+      },
+    ],
+  },
+};
