@@ -109,20 +109,20 @@ export const handler = [
   }),
 
   rest.get('https://gateway.marvel.com/v1/public/stories/1', (_, res, ctx) => {
-    return res(ctx.status(200), ctx.json({ results: [response] }));
+    return res(ctx.status(200), ctx.json(filterStoryByComicResponse));
   }),
 
   rest.get(
     'https://gateway.marvel.com/v1/public/stories/1/comics',
     (_, res, ctx) => {
-      return res(ctx.status(200), ctx.json({ results: [response] }));
+      return res(ctx.status(200), ctx.json(comicResponse));
     }
   ),
 
-  rest.get(
-    'https://gateway.marvel.com/v1/public/stories/1/characters',
-    (_, res, ctx) => {
-      return res(ctx.status(200), ctx.json({ results: [response] }));
-    }
-  ),
+  // rest.get(
+  //   'https://gateway.marvel.com/v1/public/stories/1/characters',
+  //   (_, res, ctx) => {
+  //     return res(ctx.status(200), ctx.json({ results: [response] }));
+  //   }
+  // ),
 ];

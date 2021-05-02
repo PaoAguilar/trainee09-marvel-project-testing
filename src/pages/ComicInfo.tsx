@@ -18,17 +18,11 @@ const ComicInfo = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentPageChar, setCurrentPageChar] = useState<number>(1);
   const { comic, comicCharacters, comicStories } = state;
-  const [isSearching, setIsSearching] = useState(false);
   const [total, setTotal] = useState(0);
   const hideButton = true;
 
   useEffect(() => {
-    
-    setIsSearching(true);
     getComic(comicId).then((response) => {
-      // console.log(response);
-      
-      setIsSearching(false);
       dispatch({
         type: 'SET_COMIC',
         payload: { comic: response.data.results[0] },
@@ -37,9 +31,7 @@ const ComicInfo = () => {
   }, [comicId, dispatch]);
 
   useEffect(() => {
-    // setIsSearching(true);
     getComicsCharacters(comicId, currentPageChar).then((response) => {
-      // setIsSearching(false);
       if (response) setTotal(response.data.total);
       dispatch({
         type: 'SET_COMIC_CHARACTERS',
@@ -50,7 +42,6 @@ const ComicInfo = () => {
 
   useEffect(() => {
     getComicsStories(comicId, currentPage).then((response) => {
-      console.log('Dentro En el useeffect');
       if (response) setTotal(response.data.total);
       dispatch({
         type: 'SET_COMIC_STORIES',
@@ -71,7 +62,6 @@ const ComicInfo = () => {
     <>
       <h1>COMIC INFORMATION</h1>
       <div className="comic">
-      {isSearching && <div>Searching ...</div>}
         <div className="comic__image">
           <img
             src={`${comic?.thumbnail.path}.${comic?.thumbnail.extension}`}
@@ -93,7 +83,6 @@ const ComicInfo = () => {
         </div>
       </div>
       {comicCharacters?.length === 0 ? <> </> : <h1>CHARACTERS</h1>}
-      {/* {isSearching && <div>Searching Characters...</div>} */}
       <div className="characters">
         {comicCharacters?.map((character: Character) => {
           return (
@@ -115,7 +104,6 @@ const ComicInfo = () => {
         />
       )}
       {comicStories?.length === 0 ? <> </> : <h1>STORIES</h1>}
-      {/* {isSearching && <div>Searching Stories...</div>} */}
       <div className="stories">
         {comicStories?.map((story: Story) => {
           return (
