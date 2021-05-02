@@ -29,6 +29,6 @@ describe('Testing Character Info', () => {
     await waitFor(()=> expect(screen.getByText('Wolverine')).toBeInTheDocument());
     await waitFor(()=> expect(screen.getByText('Weapon X: Days of Future Now (2005) #5')).toBeInTheDocument());
     await waitFor(()=> expect(screen.getByText('Interior #11')).toBeInTheDocument());
-    screen.debug();
+    // screen.debug();
   });
 });

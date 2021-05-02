@@ -23,8 +23,11 @@ const ComicInfo = () => {
   const hideButton = true;
 
   useEffect(() => {
+    
     setIsSearching(true);
     getComic(comicId).then((response) => {
+      // console.log(response);
+      
       setIsSearching(false);
       dispatch({
         type: 'SET_COMIC',
@@ -34,9 +37,9 @@ const ComicInfo = () => {
   }, [comicId, dispatch]);
 
   useEffect(() => {
-    setIsSearching(true);
+    // setIsSearching(true);
     getComicsCharacters(comicId, currentPageChar).then((response) => {
-      setIsSearching(false);
+      // setIsSearching(false);
       if (response) setTotal(response.data.total);
       dispatch({
         type: 'SET_COMIC_CHARACTERS',
@@ -46,9 +49,8 @@ const ComicInfo = () => {
   }, [comicId, currentPageChar, dispatch]);
 
   useEffect(() => {
-    setIsSearching(true);
     getComicsStories(comicId, currentPage).then((response) => {
-      setIsSearching(false);
+      console.log('Dentro En el useeffect');
       if (response) setTotal(response.data.total);
       dispatch({
         type: 'SET_COMIC_STORIES',
@@ -91,7 +93,7 @@ const ComicInfo = () => {
         </div>
       </div>
       {comicCharacters?.length === 0 ? <> </> : <h1>CHARACTERS</h1>}
-      {isSearching && <div>Searching Characters...</div>}
+      {/* {isSearching && <div>Searching Characters...</div>} */}
       <div className="characters">
         {comicCharacters?.map((character: Character) => {
           return (
@@ -113,7 +115,7 @@ const ComicInfo = () => {
         />
       )}
       {comicStories?.length === 0 ? <> </> : <h1>STORIES</h1>}
-      {isSearching && <div>Searching Stories...</div>}
+      {/* {isSearching && <div>Searching Stories...</div>} */}
       <div className="stories">
         {comicStories?.map((story: Story) => {
           return (

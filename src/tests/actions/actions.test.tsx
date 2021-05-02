@@ -20,8 +20,11 @@ import {
   getStoryCharacters,
 } from '../../config/actions';
 import {
+  comicCharactersResponse,
   comicFormatFilterResponse,
   comicListResponse,
+  comicResponse,
+  comicStoriesResponse,
   comicTitleFilterResponse,
 } from './comicsResponse';
 import {
@@ -92,9 +95,8 @@ describe('All the fetches', () => {
   });
 
   test('should return a comic', async () => {
-    const res = { results: [response] };
     const data = await getComic('1');
-    expect(data).toEqual(res);
+    expect(data).toEqual(comicResponse);
   });
 
   test('should filter a comic by format', async () => {
@@ -116,7 +118,7 @@ describe('All the fetches', () => {
   test('should get comics stories', async () => {
     const res = { results: [response] };
     const data = await getComicsStories('1', 1);
-    expect(data).toEqual(res);
+    expect(data).toEqual(comicStoriesResponse);
   });
 
   test('should get list of stories', async () => {
