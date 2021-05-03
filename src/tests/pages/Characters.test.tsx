@@ -8,7 +8,6 @@ import '@testing-library/jest-dom/extend-expect';
 import Characters from '../../pages/Characters';
 import user from '@testing-library/user-event';
 import GlobalProvider from '../../context/GlobalContext';
-import { BrowserRouter } from 'react-router-dom';
 import { act } from 'react-dom/test-utils';
 import userEvent from '@testing-library/user-event';
 
@@ -31,8 +30,7 @@ test('should get characters by name', async () => {
   const { getByPlaceholderText } = render(
     <GlobalProvider>
       <Characters />
-    </GlobalProvider>,
-    { wrapper: BrowserRouter }
+    </GlobalProvider>
   );
   await waitForElementToBeRemoved(() => screen.getByText('No Results Found')); 
   act(() => {
@@ -51,8 +49,7 @@ test('should get characters by comic id', async () => {
   const { getByPlaceholderText } = render(
     <GlobalProvider>
       <Characters />
-    </GlobalProvider>,
-    { wrapper: BrowserRouter }
+    </GlobalProvider>
   );
   await waitForElementToBeRemoved(() => screen.getByText('No Results Found'));
   const select = screen.getByTestId('filterSelect');
@@ -73,8 +70,7 @@ test('should get characters by story id', async () => {
   const { getByPlaceholderText } = render(
     <GlobalProvider>
       <Characters />
-    </GlobalProvider>,
-    { wrapper: BrowserRouter }
+    </GlobalProvider>
   );
   await waitForElementToBeRemoved(() => screen.getByText('No Results Found'));
   const select = screen.getByTestId('filterSelect');

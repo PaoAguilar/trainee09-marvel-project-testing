@@ -5,7 +5,6 @@ import {
   screen,
   waitForElementToBeRemoved,
 } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
 import GlobalProvider from '../../context/GlobalContext';
 import Comics from '../../pages/Comics';
 import userEvent from '@testing-library/user-event';
