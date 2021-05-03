@@ -16,8 +16,7 @@ describe('Testing Comic component', () => {
     render(
       <GlobalProvider>
         <Comics />
-      </GlobalProvider>,
-      { wrapper: BrowserRouter }
+      </GlobalProvider>
     );
     await waitForElementToBeRemoved(() => screen.getByText('No Results Found'));
     expect(screen.getByText(/comics/i)).toBeInTheDocument();
@@ -28,8 +27,7 @@ describe('Testing Comic component', () => {
     const { getByPlaceholderText } = render(
       <GlobalProvider>
         <Comics />
-      </GlobalProvider>,
-      { wrapper: BrowserRouter }
+      </GlobalProvider>
     );
     await waitForElementToBeRemoved(() => screen.getByText('No Results Found'));
     act(() => {
@@ -45,8 +43,7 @@ describe('Testing Comic component', () => {
     render(
       <GlobalProvider>
         <Comics />
-      </GlobalProvider>,
-      { wrapper: BrowserRouter }
+      </GlobalProvider>
     );
     await waitForElementToBeRemoved(() => screen.getByText('No Results Found'));
     const select = screen.getByTestId('filterSelect');

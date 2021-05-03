@@ -16,12 +16,11 @@ test('search characters when mount', async () => {
   render(
     <GlobalProvider>
       <Characters />
-    </GlobalProvider>,
-    { wrapper: BrowserRouter }
+    </GlobalProvider>
   );
   await waitForElementToBeRemoved(() => screen.getByText('No Results Found'));
   expect(screen.getByText(/characters/i)).toBeInTheDocument();
-  // This dara comes from characterListResponse
+  // This data comes from characterListResponse
   expect(screen.getByText('Spider Man')).toBeInTheDocument();
   expect(screen.getByText('Wolfpack')).toBeInTheDocument();
   expect(screen.getByText('Wolf Cub')).toBeInTheDocument();
@@ -35,14 +34,14 @@ test('should get characters by name', async () => {
     </GlobalProvider>,
     { wrapper: BrowserRouter }
   );
-  await waitForElementToBeRemoved(() => screen.getByText('No Results Found')); // xq se tuvo que esperar que terminara el primer useeffect (del primer test)
+  await waitForElementToBeRemoved(() => screen.getByText('No Results Found')); 
   act(() => {
     const input = getByPlaceholderText('Search');
     user.type(input, 'spide');
     jest.runAllTimers();
   });
 
-  await waitForElementToBeRemoved(() => screen.queryByText(/searching/i)); // cuando se elimine searching, es porque ya resolvio el fetch
+  await waitForElementToBeRemoved(() => screen.queryByText(/searching/i)); 
   expect(screen.queryByText(/characters/i)).toBeInTheDocument();
   expect(screen.getByText('Wolfpack')).toBeInTheDocument();
 });
