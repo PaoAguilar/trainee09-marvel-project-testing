@@ -33,7 +33,6 @@ import {
   characterStoriesResponse,
   filterByComicResponse,
   filterCharByStoryResponse,
-  response,
   searchResponse,
 } from './response';
 import {

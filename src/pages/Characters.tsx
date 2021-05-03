@@ -28,17 +28,11 @@ const Characters = () => {
   const debouncedSearchTerm = useDebounce(searchTerm, 1000);
 
   useEffect(() => {
-    // console.log(filterBy);
-    
     if (filterBy === '' || filterBy === 'Name') {
-      // console.log("Serching name");
-      
       if (searchTerm) {
-        // console.log("Entro al if del name");
         setIsSearching(true);
         filterCharactersByName(debouncedSearchTerm, currentPage).then(
           (response) => {
-            // console.log(JSON.stringify(response) );
             if (response) setTotal(response.data.total);
             setIsSearching(false);
             dispatch({
@@ -49,12 +43,9 @@ const Characters = () => {
         );
       }
     } else if (filterBy === 'Comic') {
-      // console.log('en filter comic');
       if (searchTerm) {
         filterCharactersByComic(debouncedSearchTerm, currentPage).then(
           (response) => {
-            // console.log(response);
-            
             if (response) setTotal(response.data.total);
             setIsSearching(false);
             dispatch({
@@ -88,7 +79,6 @@ const Characters = () => {
     if (debouncedSearchTerm) {
       return;
     } else {
-      // console.log("En get list of char");   
       getListOfCharacters(currentPage).then((response) => {
         setTotal(response.data.total);
         dispatch({
