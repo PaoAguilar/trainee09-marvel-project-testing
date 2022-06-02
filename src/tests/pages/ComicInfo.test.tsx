@@ -21,7 +21,10 @@ describe('Testing Comic Info', () => {
           <ComicInfo />
         </GlobalProvider>
       );
+
+    // screen.debug()
     await waitFor(()=> expect(screen.getByText('Savage Avengers (2019) #19')).toBeInTheDocument());
+    screen.debug()
     await waitFor(()=> expect(screen.getByText('Ben Urich')).toBeInTheDocument());
     await waitFor(()=> expect(screen.getByText('Cover #2769')).toBeInTheDocument());
   });
